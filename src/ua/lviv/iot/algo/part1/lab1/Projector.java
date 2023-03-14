@@ -37,17 +37,22 @@ public class Projector {
 
     public static void main(String[] args) {
         Projector firstProjector = new Projector();
-        firstProjector.model = "Sony";
-        firstProjector.connectedDevice = "VGA";
-        firstProjector.resolution = "1920x1920";
-        firstProjector.lampHours = 4;
-        System.out.println(firstProjector);
+        Projector secondProjector = new Projector("Lenovo", "HDMI", "2420x2420", 12);
+        Projector thirdProjector = new Projector("Acer", "VGA", "1000x1000", 7);
+        Projector fourthProjector = Projector.getInstance();
 
-        firstProjector.addInputDevice("DVI");
-        firstProjector.increaseLampHours(3);
-        System.out.println(firstProjector);
+        Projector[] projectors = {firstProjector, secondProjector, thirdProjector, fourthProjector};
 
-        firstProjector.disconnectDevice();
-        System.out.println(firstProjector);
+        for (Projector projector : projectors){
+            System.out.println(projector);
+        }
+
+
+        secondProjector.addInputDevice("DVI");
+        secondProjector.increaseLampHours(3);
+        System.out.println(secondProjector);
+
+        thirdProjector.disconnectDevice();
+        System.out.println(thirdProjector);
     }
 }
