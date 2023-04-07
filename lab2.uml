@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ua.lviv.iot.algo.part1.lab1</OriginalElement>
+  <nodes>
+    <node x="283.0" y="448.0361581920904">ua.lviv.iot.algo.part1.lab1.LampProjector</node>
+    <node x="-162.8037886340977" y="448.0361581920904">ua.lviv.iot.algo.part1.lab1.ProjectorManager</node>
+    <node x="-118.80378863409771" y="-17.0">ua.lviv.iot.algo.part1.lab1.HomeTheater</node>
+    <node x="234.0" y="-17.0">ua.lviv.iot.algo.part1.lab1.AbstractProjector</node>
+    <node x="518.8037886340977" y="-17.0">ua.lviv.iot.algo.part1.lab1.InteractiveProjector</node>
+    <node x="659.3687603855102" y="292.0361581920904">ua.lviv.iot.algo.part1.lab1.WirelessProjector</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ua.lviv.iot.algo.part1.lab1.ProjectorManager" target="ua.lviv.iot.algo.part1.lab1.WirelessProjector" relationship="CREATE">
+      <point x="0.0" y="71.5" />
+      <point x="53.196211365902286" y="720.5361581920904" />
+      <point x="778.8687603855102" y="720.5361581920904" />
+      <point x="0.0" y="127.5" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.ProjectorManager" target="ua.lviv.iot.algo.part1.lab1.InteractiveProjector" relationship="CREATE">
+      <point x="-189.5" y="-71.5" />
+      <point x="-136.3037886340977" y="-49.5" />
+      <point x="677.3037886340977" y="-49.5" />
+      <point x="0.0" y="-127.5" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.ProjectorManager" target="ua.lviv.iot.algo.part1.lab1.AbstractProjector" relationship="TO_MANY">
+      <point x="208.5" y="-71.5" />
+      <point x="-99.30378863409771" y="193.5" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.LampProjector" target="ua.lviv.iot.algo.part1.lab1.AbstractProjector" relationship="GENERALIZATION">
+      <point x="0.0" y="-127.5001581920904" />
+      <point x="433.0" y="387.5" />
+      <point x="504.0" y="387.5" />
+      <point x="504.0" y="176.5" />
+      <point x="127.0" y="0.0" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.WirelessProjector" target="ua.lviv.iot.algo.part1.lab1.LampProjector" relationship="GENERALIZATION">
+      <point x="-119.5" y="120.0" />
+      <point x="150.0" y="-36.0" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.ProjectorManager" target="ua.lviv.iot.algo.part1.lab1.LampProjector" relationship="CREATE">
+      <point x="216.0" y="56.0" />
+      <point x="-150.0" y="0.0" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.InteractiveProjector" target="ua.lviv.iot.algo.part1.lab1.AbstractProjector" relationship="GENERALIZATION">
+      <point x="-158.49978863409774" y="0.0" />
+      <point x="504.0" y="110.5" />
+      <point x="504.0" y="176.5" />
+      <point x="127.0" y="0.0" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.ProjectorManager" target="ua.lviv.iot.algo.part1.lab1.HomeTheater" relationship="CREATE">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="149.5" />
+    </edge>
+    <edge source="ua.lviv.iot.algo.part1.lab1.HomeTheater" target="ua.lviv.iot.algo.part1.lab1.AbstractProjector" relationship="GENERALIZATION">
+      <point x="-2.113659022882075E-4" y="-149.5" />
+      <point x="53.196" y="-34.5" />
+      <point x="504.0" y="-34.5" />
+      <point x="504.0" y="176.5" />
+      <point x="127.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.1188369152970923" showDependencies="true" x="346.49999999999994" y="336.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
