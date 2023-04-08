@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+   <duplication lines="53" tokens="367">
+      <file begintoken="750" column="1" endcolumn="1" endline="60" endtoken="1116" line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\ProjectorManager.java"/>
+      <file begintoken="1860" column="1" endcolumn="1" endline="60" endtoken="2226"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\ProjectorManager.java"/>
+      <codefragment><![CDATA[public class ProjectorManager {
+    private static final List<AbstractProjector> projectors = new LinkedList<>();
+
+    public static void addProjector(AbstractProjector projector) {
+        projectors.add(projector);
+    }
+
+    public static List<AbstractProjector> findProjectorsTheSameConnectedDevice(String connectedDevice) {
+        return projectors.stream()
+                .filter(projector -> {
+                    String device = projector.getConnectedDevice();
+                    return device != null && device.equals(connectedDevice);
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    public static List<AbstractProjector> findProjectorsTheSameModel(String model){
+        return projectors.stream()
+                .filter(projector -> {
+                    String device = projector.getModel();
+                    return device != null && device.equals(model);
+                })
+                .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        addProjector(new LampProjector("Acer", "HDMI", "1920x1920", 7, "Sport"));
+        addProjector(new LampProjector("Samsung", "DVI", "1920x1920",3, "Presentation"));
+        addProjector(new HomeTheater("Acer", "VGA", "1024x1024","12.11.2006", 4, 22.5f, "Android"));
+        addProjector(new HomeTheater("Apple", "DP", "2024x2024","5.01.2022", 6, 44.5f, "iOS"));
+        addProjector(new WirelessProjector(5, "HDMI", "abcdefg"));
+        addProjector(new WirelessProjector(6, "DVI", "Pull"));
+        addProjector(new InteractiveProjector("Acer", "DVI", "1024x1024", true));
+        addProjector(new InteractiveProjector("Sony", "DP", "2024x2024", true));
+
+        for (AbstractProjector projector : projectors) {
+            System.out.println(projector);
+        }
+
+        var projectorsConnectedDevice = ProjectorManager.findProjectorsTheSameConnectedDevice("DVI");
+        System.out.println("Projectors with the same connected device: ");
+        for (AbstractProjector projector: projectorsConnectedDevice){
+            System.out.println(projector);
+        }
+
+        var projectorsModel = ProjectorManager.findProjectorsTheSameModel("Acer");
+        System.out.println("Projectors with the same model: ");
+        for (AbstractProjector projector: projectorsModel){
+            System.out.println(projector);
+        }
+    }
+}]]></codefragment>
+   </duplication>
+   <duplication lines="53" tokens="224">
+      <file begintoken="1118" column="1" endcolumn="1" endline="60" endtoken="1341"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\WirelessProjector.java"/>
+      <file begintoken="2228" column="1" endcolumn="1" endline="60" endtoken="2451"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\WirelessProjector.java"/>
+      <codefragment><![CDATA[@Getter
+@Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+
+public class WirelessProjector extends LampProjector {
+    private String wifiNetworkName;
+
+    public WirelessProjector(int lampHours, String mode, String wifiNetworkName) {
+        this.lampHours = lampHours;
+        this.mode = mode;
+        this.wifiNetworkName = wifiNetworkName;
+    }
+
+    public void connectToWifi(String wifiNetworkName) {
+        if (this.connectedDevice != null) {
+            System.out.println("Please disconnect the currently connected device before connecting to WiFi.");
+            return;
+        }
+        this.connectedDevice = "WiFi";
+        this.wifiNetworkName = wifiNetworkName;
+        System.out.println("Connected to WiFi network " + wifiNetworkName);
+    }
+
+    @Override
+    public String addInputDevice(String device) {
+        System.out.println("This projector cannot add input devices as it is wireless.");
+        return device;
+    }
+
+    @Override
+    public String disconnectDevice() {
+        if (this.connectedDevice.equals("WiFi")) {
+            System.out.println("Disconnected from WiFi network " + wifiNetworkName);
+            this.connectedDevice = null;
+            this.wifiNetworkName = null;
+        } else {
+            System.out.println("No input device is currently connected.");
+        }
+        return null;
+    }
+
+    @Override
+    public int increaseLampHours(int hours) {
+        super.increaseLampHours(hours);
+        System.out.println("Lamp hours increased by " + hours + ". Total lamp hours: " + this.lampHours);
+        return hours;
+    }
+
+    public int getRemainingWorkingHours() {
+        return super.getRemainingWorkingHours();
+    }
+}]]></codefragment>
+   </duplication>
+   <duplication lines="37" tokens="166">
+      <file begintoken="583" column="1" endcolumn="1" endline="44" endtoken="748" line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\LampProjector.java"/>
+      <file begintoken="1693" column="1" endcolumn="1" endline="44" endtoken="1858"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\LampProjector.java"/>
+      <codefragment><![CDATA[@Getter
+@Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+
+public class LampProjector extends AbstractProjector {
+    protected int lampHours;
+    protected String mode;
+
+    public LampProjector(String model, String connectedDevice, String resolution, int lampHours, String mode){
+        super(model, connectedDevice, resolution);
+        this.lampHours = lampHours;
+        this.mode = mode;
+    }
+
+    public int increaseLampHours(int hours) {
+        this.setLampHours(this.getLampHours() + hours);
+        return this.getLampHours();
+    }
+
+    public int getRemainingWorkingHours(){
+        return lampHours;
+    }
+
+    public void outputModeInformation() {
+        if (mode.equals("Sport")) {
+            setLampHours(12);
+        }
+        if (mode.equals("Active")) {
+            setLampHours(1);
+        }
+        if (mode.equals("Presentation")) {
+            setLampHours(3);
+        }
+        System.out.println(mode + "mode max working time = " + getLampHours());
+    }
+}]]></codefragment>
+   </duplication>
+   <duplication lines="37" tokens="139">
+      <file begintoken="443" column="1" endcolumn="1" endline="44" endtoken="581" line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\InteractiveProjector.java"/>
+      <file begintoken="1553" column="1" endcolumn="1" endline="44" endtoken="1691"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\InteractiveProjector.java"/>
+      <codefragment><![CDATA[@Getter
+@Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+
+public class InteractiveProjector extends AbstractProjector {
+    private boolean touchScreen;
+    private int interactivePenBatteryLevel;
+
+    public InteractiveProjector(String model, String connectedDevice, String resolution, boolean touchScreen) {
+        super(model, connectedDevice, resolution);
+        this.touchScreen = touchScreen;
+        this.interactivePenBatteryLevel = 100;
+    }
+
+    public void useInteractivePen() {
+        if (this.interactivePenBatteryLevel > 0) {
+            System.out.println("Using interactive pen...");
+            this.interactivePenBatteryLevel--;
+        } else {
+            System.out.println("Interactive pen battery is empty.");
+        }
+    }
+
+    public void chargeInteractivePen() {
+        System.out.println("Charging interactive pen...");
+        this.interactivePenBatteryLevel = 100;
+    }
+
+    public boolean isTouchScreen() {
+        return touchScreen;
+    }
+
+    public int getRemainingWorkingHours(){
+        return interactivePenBatteryLevel;
+    }
+}]]></codefragment>
+   </duplication>
+   <duplication lines="34" tokens="105">
+      <file begintoken="233" column="1" endcolumn="1" endline="43" endtoken="337" line="10"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\AbstractProjector.java"/>
+      <file begintoken="1343" column="1" endcolumn="1" endline="43" endtoken="1447"
+            line="10"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\AbstractProjector.java"/>
+      <codefragment><![CDATA[@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public abstract class AbstractProjector {
+    protected String model;
+    protected String connectedDevice;
+    protected String resolution;
+
+    public String addInputDevice(String device){
+        this.setConnectedDevice(device);
+        return this.getConnectedDevice();
+    }
+
+    public String disconnectDevice(){
+        this.setConnectedDevice("Empty");
+        return this.getConnectedDevice();
+    }
+
+    public int increaseLampHours(int hours) {
+        return hours;
+    }
+
+    public void useInteractivePen(){};
+
+    public void chargeInteractivePen(){};
+
+    public boolean isTouchScreen() {
+        return true;
+    }
+
+    public abstract int getRemainingWorkingHours();
+}]]></codefragment>
+   </duplication>
+   <duplication lines="25" tokens="103">
+      <file begintoken="339" column="1" endcolumn="1" endline="32" endtoken="441" line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab2\HomeTheater.java"/>
+      <file begintoken="1449" column="1" endcolumn="1" endline="32" endtoken="1551"
+            line="8"
+            path="C:\Users\zavap\work\src\main\java\ua\lviv\iot\algo\part1\lab3\HomeTheater.java"/>
+      <codefragment><![CDATA[@Getter
+@Setter
+@NoArgsConstructor
+@ToString(callSuper = true)
+
+public class HomeTheater extends AbstractProjector{
+    final static int WORKING_HOURS_PER_YEAR = 3650;
+
+    private String yearOfSelling;
+    private int yearsOfGuarantee;
+    private float sizeInInch;
+    private String versionSmartTV;
+
+    public HomeTheater(String model, String connectedDevice, String resolution, String yearOfSelling, int yearsOfGuarantee, float sizeInInch, String versionSmartTV){
+        super(model, connectedDevice, resolution);
+        this.yearOfSelling = yearOfSelling;
+        this.yearsOfGuarantee = yearsOfGuarantee;
+        this.sizeInInch = sizeInInch;
+        this.versionSmartTV = versionSmartTV;
+    }
+
+    public int getRemainingWorkingHours(){
+        return yearsOfGuarantee * WORKING_HOURS_PER_YEAR;
+    }
+}]]></codefragment>
+   </duplication>
+</pmd-cpd>
