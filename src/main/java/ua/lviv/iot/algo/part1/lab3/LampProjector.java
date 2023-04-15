@@ -40,4 +40,14 @@ public class LampProjector extends AbstractProjector {
         }
         return modeInformation;
     }
+
+    @Override
+    public String getHeaders() {
+        return super.getHeaders() + ", " + "lampHours, mode";
+    }
+
+    @Override
+    public String toCSV(){
+        return super.toCSV() + ", " + lampHours + ", " + mode;
+    }
 }

@@ -1,0 +1,12 @@
+model, connectedDevice, resolution, lampHours, mode
+Acer, HDMI, 1920x1920, 7, Sport
+Samsung, DVI, 1920x1920, 3, Presentation
+model, connectedDevice, resolution, yearOfSelling, yearsOfGuarantee, sizeInInch, versionSmartTV
+Acer, VGA, 1024x1024, 12.11.2006, 4, 22.5, Android
+Apple, DP, 2024x2024, 5.01.2022, 6, 44.5, iOS
+model, connectedDevice, resolution, wifiNetworkName
+Acer, HDMI, 1920x1920, Wireless
+Apple, DP, 2024x2024, Interactive
+model, connectedDevice, resolution, touchScreen, interactivePenBatteryLevel
+Acer, DVI, 1024x1024, true, 100
+Sony, DP, 2024x2024, true, 100

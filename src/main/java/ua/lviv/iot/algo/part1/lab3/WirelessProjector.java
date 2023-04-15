@@ -10,12 +10,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 
-public class WirelessProjector extends LampProjector {
+public class WirelessProjector extends AbstractProjector {
     private String wifiNetworkName;
 
-    public WirelessProjector(int lampHours, String mode, String wifiNetworkName) {
-        this.lampHours = lampHours;
-        this.mode = mode;
+    public WirelessProjector(String model, String connectedDevice, String resolution, String wifiNetworkName) {
+        super(model, connectedDevice, resolution);
         this.wifiNetworkName = wifiNetworkName;
     }
 
@@ -41,8 +40,6 @@ public class WirelessProjector extends LampProjector {
             System.out.println("Disconnected from WiFi network " + wifiNetworkName);
             this.connectedDevice = null;
             this.wifiNetworkName = null;
-        } else {
-            System.out.println("No input device is currently connected.");
         }
         return null;
     }
@@ -50,12 +47,21 @@ public class WirelessProjector extends LampProjector {
     @Override
     public int increaseLampHours(int hours) {
         super.increaseLampHours(hours);
-        System.out.println("Lamp hours increased by " + hours + ". Total lamp hours: " + this.lampHours);
         return hours;
     }
 
     public int getRemainingWorkingHours() {
-        return super.getRemainingWorkingHours();
+        return 0;
+    }
+
+    @Override
+    public String getHeaders() {
+        return super.getHeaders() + ", " + "wifiNetworkName";
+    }
+
+    @Override
+    public String toCSV(){
+        return super.toCSV() + ", " + wifiNetworkName;
     }
 }
 

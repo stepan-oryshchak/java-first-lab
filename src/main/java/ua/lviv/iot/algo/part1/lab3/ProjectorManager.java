@@ -1,6 +1,5 @@
 package ua.lviv.iot.algo.part1.lab3;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,8 +35,8 @@ public class ProjectorManager {
         addProjector(new LampProjector("Samsung", "DVI", "1920x1920",3, "Presentation"));
         addProjector(new HomeTheater("Acer", "VGA", "1024x1024","12.11.2006", 4, 22.5f, "Android"));
         addProjector(new HomeTheater("Apple", "DP", "2024x2024","5.01.2022", 6, 44.5f, "iOS"));
-        addProjector(new WirelessProjector(5, "HDMI", "abcdefg"));
-        addProjector(new WirelessProjector(6, "DVI", "Pull"));
+        addProjector(new WirelessProjector("Acer", "HDMI", "1920x1920", "Wireless"));
+        addProjector(new WirelessProjector("Apple", "DP", "2024x2024", "Interactive"));
         addProjector(new InteractiveProjector("Acer", "DVI", "1024x1024", true));
         addProjector(new InteractiveProjector("Sony", "DP", "2024x2024", true));
 
@@ -56,5 +55,8 @@ public class ProjectorManager {
         for (AbstractProjector projector: projectorsModel){
             System.out.println(projector);
         }
+
+        ProjectorWriter projectorWriter = new ProjectorWriter();
+        projectorWriter.writeToFile(projectors);
     }
 }
