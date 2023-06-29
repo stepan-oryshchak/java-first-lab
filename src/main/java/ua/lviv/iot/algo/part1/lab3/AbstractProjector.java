@@ -6,12 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+
 public abstract class AbstractProjector {
     protected String model;
     protected String connectedDevice;
@@ -23,8 +23,16 @@ public abstract class AbstractProjector {
     }
 
     public String disconnectDevice(){
-        this.setConnectedDevice("Empty");
+        this.setConnectedDevice(null);
         return this.getConnectedDevice();
+    }
+
+    public String getHeaders() {
+        return "model, connectedDevice, resolution";
+    }
+
+    public String toCSV() {
+        return model + ", " + connectedDevice + ", " + resolution;
     }
 
     public int increaseLampHours(int hours) {

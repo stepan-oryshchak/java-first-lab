@@ -29,4 +29,14 @@ public class HomeTheater extends AbstractProjector{
     public int getRemainingWorkingHours(){
         return yearsOfGuarantee * WORKING_HOURS_PER_YEAR;
     }
+
+    @Override
+    public String getHeaders() {
+        return super.getHeaders() + ", " + "yearOfSelling, yearsOfGuarantee, sizeInInch, versionSmartTV";
+    }
+
+    @Override
+    public String toCSV(){
+        return super.toCSV() + ", " + yearOfSelling + ", " + yearsOfGuarantee + ", " + sizeInInch + ", " + versionSmartTV;
+    }
 }

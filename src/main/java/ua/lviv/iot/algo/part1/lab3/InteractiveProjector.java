@@ -41,5 +41,15 @@ public class InteractiveProjector extends AbstractProjector {
     public int getRemainingWorkingHours(){
         return interactivePenBatteryLevel;
     }
+
+    @Override
+    public String getHeaders() {
+        return super.getHeaders() + ", " + "touchScreen, interactivePenBatteryLevel";
+    }
+
+    @Override
+    public String toCSV(){
+        return super.toCSV() + ", " + touchScreen + ", " + interactivePenBatteryLevel;
+    }
 }
 
